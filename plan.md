@@ -118,13 +118,13 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 
 Build panels in the same order as the formula layer. Each panel reads from and writes to the Zustand store.
 
-### [ ] Task 3.1 — Reusable input section (`input-section.tsx`)
+### [x] Task 3.1 — Reusable input section (`input-section.tsx`)
 
 - Collapsible wrapper using shadcn `Collapsible`
 - Props: `title: string`, `children: React.ReactNode`, `defaultOpen?: boolean`
 - **Commit:** `feat(components): add reusable collapsible input section`
 
-### [ ] Task 3.2 — Character panel (`character-panel.tsx`)
+### [x] Task 3.2 — Character panel (`character-panel.tsx`)
 
 - Inputs: base ATK, grid weapon ATK values (with weapon specialty toggle), summon ATK
 - **Commit:** `feat(components): add character panel`

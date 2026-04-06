@@ -53,7 +53,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 - Formula: `1 - atkDownMod / 100`
 - **Commit:** `feat(formula): implement atk down debuff effect`
 
-### [ ] Task 1.6 — Crew boosts (`crew.ts`)
+### [x] Task 1.6 — Crew boosts (`crew.ts`)
 
 - Implement:
   - `calculateCrewShipBoost` — `1 + crewShipMod / 100`

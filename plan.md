@@ -182,7 +182,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Ensure `globals.css` sets up Tailwind base styles
 - **Commit:** `feat(app): compose calculator page layout`
 
-### [ ] Task 4.2 — Final build check
+### [x] Task 4.2 — Final build check
 
 - Run `npm run lint` — fix any ESLint errors
 - Run `npm run build` — verify static export succeeds with no errors

@@ -1,5 +1,5 @@
 ---
-description: Reviews code for quality and best practices
+description: Does simple jobs to save tokens
 mode: primary
 model: zai-coding-plan/glm-4.5-air
 temperature: 0.1

@@ -60,7 +60,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
   - `calculateCrewSkillsBoost` — `1 + crewSkillMod / 100`
 - **Commit:** `feat(formula): implement crew ship and skills boosts`
 
-### [ ] Task 1.7 — Base damage (`base-damage.ts`)
+### [x] Task 1.7 — Base damage (`base-damage.ts`)
 
 - Implement `calculateBaseDamage(inputs): number`
 - Multiply all boost results together with Character total ATK:

@@ -94,7 +94,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
   - `caWeaponBoost = 1 + caWeaponMods / 100`
 - **Commit:** `feat(formula): implement charge attack damage`
 
-### [ ] Task 1.11 — Main entry point (`index.ts`)
+### [x] Task 1.11 — Main entry point (`index.ts`)
 
 - Implement `calculate(inputs: CalculatorInputs): CalculatorResult`
 - Calls all formula modules in order and returns `{ baseDamage, normalDamage, criticalDamage, caDamage }`

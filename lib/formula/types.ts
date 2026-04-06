@@ -87,6 +87,10 @@ export interface CaDamageInputs {
   fixedCaDamage: number
 }
 
+export interface CriticalInputs {
+  criticalMods: number
+}
+
 export interface BaseDamageResult {
   value: number
 }
@@ -112,6 +116,7 @@ export interface CalculatorInputs {
   crew: CrewInputs
   enemy: EnemyInputs
   caDamage: CaDamageInputs
+  critical: CriticalInputs
 }
 
 export interface CalculatorResult {

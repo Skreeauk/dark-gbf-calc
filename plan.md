@@ -47,7 +47,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
   - `calculateTotalCharUniqueAtkBoosts` — product of all individual Unique ATK boosts
 - **Commit:** `feat(formula): implement character mod boosts`
 
-### [ ] Task 1.5 — ATK down debuff (`atk-debuff.ts`)
+### [x] Task 1.5 — ATK down debuff (`atk-debuff.ts`)
 
 - Implement `calculateAtkDebuffEffect(inputs: AtkDebuffInputs): number`
 - Formula: `1 - atkDownMod / 100`

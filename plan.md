@@ -68,7 +68,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 - Character total ATK: sum of base ATK + grid weapon ATK values (weapon specialty weapons contribute at 120%)
 - **Commit:** `feat(formula): implement base damage calculation`
 
-### [ ] Task 1.8 — Enemy DEF and Sleeping boost (`enemy.ts`)
+### [x] Task 1.8 — Enemy DEF and Sleeping boost (`enemy.ts`)
 
 - Implement `calculateEnemyDef(inputs: EnemyInputs): number`
   - `innate DEF × (1 + defUpMods - defDownMods - uniqueDefDownMods)`

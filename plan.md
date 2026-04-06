@@ -77,7 +77,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
   - `Stared Stiff` = 1.10, `Sleep` = 1.25, `Comatose` = 1.50, `None` = 1.0
 - **Commit:** `feat(formula): implement enemy def and sleeping boost`
 
-### [ ] Task 1.9 — Normal and Critical damage (`normal-damage.ts`)
+### [x] Task 1.9 — Normal and Critical damage (`normal-damage.ts`)
 
 - Implement `calculateNormalDamage(baseDamage, enemyDef, sleepingBoost, randomModifier): number`
   - `baseDamage × sleepingBoost × randomModifier / enemyDef`

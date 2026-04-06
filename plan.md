@@ -144,7 +144,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: Jammed, Strength, EMP mods, Ring mods, AX mods, Perpetuity mod, Unique Stackable mod, Assassin mod, Unique ATK boosts
 - **Commit:** `feat(components): add character mods panel`
 
-### [ ] Task 3.6 — ATK debuff panel (`atk-debuff-panel.tsx`)
+### [x] Task 3.6 — ATK debuff panel (`atk-debuff-panel.tsx`)
 
 - Inputs: ATK down mod (%)
 - **Commit:** `feat(components): add atk debuff panel`

@@ -149,7 +149,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: ATK down mod (%)
 - **Commit:** `feat(components): add atk debuff panel`
 
-### [ ] Task 3.7 — Crew panel (`crew-panel.tsx`)
+### [x] Task 3.7 — Crew panel (`crew-panel.tsx`)
 
 - Inputs: Crew Ship mod (%), Crew Skills mod (%)
 - **Commit:** `feat(components): add crew panel`

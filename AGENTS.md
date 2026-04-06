@@ -118,7 +118,6 @@ If a task references any of the above, flag it as out of scope rather than imple
 ## Folder Structure
 
 ```
-src/
   lib/
     formula/
       types.ts             — All input/output TypeScript types

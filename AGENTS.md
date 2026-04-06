@@ -1,9 +1,11 @@
 # GBF Damage Calculator — Agents Guide
 
 ## Project Purpose
+
 Single-page web application for calculating Granblue Fantasy damage based on the game's damage formula. Derived from `FORMULA.md` in the repo root.
 
 ## Tech Stack
+
 - Next.js 16.2 with App Router and Static Export (`output: 'export'`)
 - TypeScript (strict mode)
 - Tailwind CSS
@@ -19,13 +21,14 @@ Single-page web application for calculating Granblue Fantasy damage based on the
 
 Use the appropriate model from **z.ai** based on task type:
 
-| Model | Task Scope | Examples |
-|---|---|---|
+| Model         | Task Scope             | Examples                                                                                             |
+| ------------- | ---------------------- | ---------------------------------------------------------------------------------------------------- |
 | `GLM-4.5-air` | Git & non-coding tasks | Commits, branch management, file moves, renaming, writing/updating `.md` files, editing config files |
-| `GLM-4.7` | General coding | TypeScript, React components, Zustand store, formula logic, Tailwind styling, debugging, refactoring |
-| `GLM-5.1` | Planning | Architecture decisions, feature scoping, breaking ambiguous tasks into subtasks, approach review |
+| `GLM-4.7`     | General coding         | TypeScript, React components, Zustand store, formula logic, Tailwind styling, debugging, refactoring |
+| `GLM-5.1`     | Planning               | Architecture decisions, feature scoping, breaking ambiguous tasks into subtasks, approach review     |
 
 ### Routing Rules
+
 - **Start with GLM-5.1** whenever a task is ambiguous, spans multiple files, or requires design decisions. Produce a concrete plan before writing any code.
 - **Use GLM-4.7** as the default for all coding work once a plan exists.
 - **Use GLM-4.5-air** for all Git operations and any edits to non-code files (`.md`, `.json`, `.env` templates, config).
@@ -46,6 +49,7 @@ Follow this sequence for every task:
 6. **Stop** — Do not continue past the defined task. Do not add unrequested features.
 
 ### Handling Blockers
+
 - If a task cannot be completed as described, stop and explain why clearly.
 - Do not silently work around a constraint or skip a step.
 - If the formula in `FORMULA.md` conflicts with an implementation detail, flag it rather than choosing arbitrarily.
@@ -55,6 +59,7 @@ Follow this sequence for every task:
 ## Git Conventions
 
 All commits use this format:
+
 ```
 <type>(<scope>): <short description>
 ```
@@ -64,6 +69,7 @@ Types: `feat`, `fix`, `refactor`, `chore`, `docs`
 Scopes map to the folder structure: `formula`, `store`, `components`, `app`, `config`
 
 Examples:
+
 ```
 feat(formula): add stamina boost calculation
 fix(components): correct enmity panel input binding
@@ -80,6 +86,7 @@ docs: update AGENTS.md model routing section
 ## Documentation Lookup
 
 **Use Context7 tools** when looking up documentation for libraries and frameworks in the tech stack:
+
 1. **Context7_resolve-library-id** — Resolve a package name to its Context7 library ID
 2. **Context7_query-docs** — Query that ID for documentation with examples
 
@@ -104,6 +111,7 @@ Use Context7 for: Next.js, Tailwind CSS, shadcn/ui, Zustand, TypeScript, ESLint.
 v1 covers **Base Damage + Normal / Critical / Charge Attack damage only**.
 
 The following are explicitly **out of scope for v1** and must not be implemented:
+
 - Skill Damage
 - Chain Burst
 - Counter
@@ -156,6 +164,7 @@ If a task references any of the above, flag it as out of scope rather than imple
 ## Conventions
 
 ### Naming
+
 - Formula modules: kebab-case (`normal-omega-ex.ts`)
 - Components: PascalCase (`CharacterPanel.tsx`)
 - Types: PascalCase (`CalculatorInputs`, `ElementalBoost`)
@@ -164,18 +173,22 @@ If a task references any of the above, flag it as out of scope rather than imple
 - Local/inline constants (single function scope): camelCase (e.g., `const cappedValue = ...`)
 
 ### State Management
+
 - All inputs and computed outputs live in the Zustand store (`calculator-store.ts`)
 - Formula modules are pure functions — no side effects, no store imports
 - Use `useStore(shallow)` when subscribing to multiple values to avoid unnecessary re-renders
 - Input updates trigger re-computation of all derived values automatically
 
 ### Component Patterns
+
 - Each panel corresponds to one formula category
 - Use shadcn `Collapsible` for all input sections
 - Numeric inputs for percentage modifiers: user enters `50` meaning 50% — the formula layer handles the `/100` conversion
+- CA multiplier: user enters `450` meaning 4.5x — the formula layer divides by 100
 - Layout: 2-column on desktop (inputs left, output right), single column stacked on mobile
 
 ### Formula Module Design
+
 - Each file exports pure functions only
 - No UI or store dependencies inside formula modules
 - All types are defined in `types.ts` and imported from there

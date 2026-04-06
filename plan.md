@@ -36,7 +36,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 - Implement `calculateNormalOmegaExBoosts(inputs): number` — product of all the above minus Fixed ATK Modifiers
 - **Commit:** `feat(formula): implement normal/omega/ex boosts`
 
-### [ ] Task 1.4 — Character mods (`character-mods.ts`)
+### [x] Task 1.4 — Character mods (`character-mods.ts`)
 
 - Implement:
   - `calculateCharEnmityBoost` — `1 + jammedMod + enmityEmpMod + ringEnmityMod + axEnmityMod`

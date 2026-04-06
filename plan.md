@@ -24,7 +24,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 - Elemental superiority: `+0.5` (superior), `-0.25` (inferior), `0` (neutral) — use an enum or union type for element matchup
 - **Commit:** `feat(formula): implement elemental boost`
 
-### [ ] Task 1.3 — Normal/Omega/EX boosts (`normal-omega-ex.ts`)
+### [x] Task 1.3 — Normal/Omega/EX boosts (`normal-omega-ex.ts`)
 
 - Implement individual boost functions:
   - `calculateNormalAtkBoost` — `1 + normAtkMod × (1 + optimusAura) + bahamutMod + ultimaMod + normSummonAura + normBuffs - normDebuffs`

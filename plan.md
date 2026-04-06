@@ -154,7 +154,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: Crew Ship mod (%), Crew Skills mod (%)
 - **Commit:** `feat(components): add crew panel`
 
-### [ ] Task 3.8 — Enemy panel (`enemy-panel.tsx`)
+### [x] Task 3.8 — Enemy panel (`enemy-panel.tsx`)
 
 - Inputs: innate DEF, DEF up mods, DEF down mods, Unique DEF down mods, sleep status (dropdown: None / Stared Stiff / Sleep / Comatose)
 - **Commit:** `feat(components): add enemy panel`

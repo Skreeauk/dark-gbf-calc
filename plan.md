@@ -134,7 +134,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: element matchup (superior / inferior / neutral), summon mod, EMP buffs, ATK buffs, ATK debuffs
 - **Commit:** `feat(components): add elemental panel`
 
-### [ ] Task 3.4 — Normal/Omega/EX panel (`normal-omega-ex-panel.tsx`)
+### [x] Task 3.4 — Normal/Omega/EX panel (`normal-omega-ex-panel.tsx`)
 
 - Inputs: all Normal/Omega/EX ATK mods, Optimus/Omega/Ranko auras, Enmity/Stamina mods, Fixed ATK Modifiers
 - **Commit:** `feat(components): add normal/omega/ex panel`

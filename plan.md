@@ -104,7 +104,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 
 ## Phase 2 — State Management
 
-### [ ] Task 2.1 — Zustand store (`calculator-store.ts`)
+### [x] Task 2.1 — Zustand store (`calculator-store.ts`)
 
 - Define store with all input fields (one field per formula input, matching `types.ts`)
 - Define computed output fields: `baseDamage`, `normalDamage`, `criticalDamage`, `caDamage`

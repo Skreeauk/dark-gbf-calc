@@ -139,7 +139,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: all Normal/Omega/EX ATK mods, Optimus/Omega/Ranko auras, Enmity/Stamina mods, Fixed ATK Modifiers
 - **Commit:** `feat(components): add normal/omega/ex panel`
 
-### [ ] Task 3.5 — Character mods panel (`character-mods-panel.tsx`)
+### [x] Task 3.5 — Character mods panel (`character-mods-panel.tsx`)
 
 - Inputs: Jammed, Strength, EMP mods, Ring mods, AX mods, Perpetuity mod, Unique Stackable mod, Assassin mod, Unique ATK boosts
 - **Commit:** `feat(components): add character mods panel`

@@ -159,12 +159,17 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: innate DEF, DEF up mods, DEF down mods, Unique DEF down mods, sleep status (dropdown: None / Stared Stiff / Sleep / Comatose)
 - **Commit:** `feat(components): add enemy panel`
 
-### [x] Task 3.9 — CA panel (`ca-panel.tsx`)
+### [x] Task 3.9 — Critical panel (`critical-panel.tsx`)
+
+- Inputs: Critical Mods (%)
+- **Commit:** `feat(components): add critical damage panel`
+
+### [x] Task 3.12 — CA panel (`ca-panel.tsx`)
 
 - Inputs: CA multiplier, CA buff mods (%), CA weapon mods (%), fixed CA damage
 - **Commit:** `feat(components): add ca panel`
 
-### [x] Task 3.10 — Damage output (`damage-output.tsx`)
+### [x] Task 3.13 — Damage output (`damage-output.tsx`)
 
 - Reads `baseDamage`, `normalDamage`, `criticalDamage`, `caDamage` from store
 - Displays each value formatted with thousands separators
@@ -205,7 +210,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 ```
 1.1 → 1.2 → 1.3 → 1.4 → 1.5 → 1.6 → 1.7 → 1.8 → 1.9 → 1.10 → 1.11
 2.1
-3.1 → 3.2 → 3.3 → 3.4 → 3.5 → 3.6 → 3.7 → 3.8 → 3.9 → 3.10
+3.1 → 3.2 → 3.3 → 3.4 → 3.5 → 3.6 → 3.7 → 3.8 → 3.9 → 3.10 → 3.11 → 3.12 → 3.13
 4.1 → 4.2
 5.1
 ```

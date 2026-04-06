@@ -7,6 +7,7 @@ import { CharacterModsPanel } from "@/components/calculator/character-mods-panel
 import { AtkDebuffPanel } from "@/components/calculator/atk-debuff-panel"
 import { CrewPanel } from "@/components/calculator/crew-panel"
 import { EnemyPanel } from "@/components/calculator/enemy-panel"
+import { CriticalPanel } from "@/components/calculator/critical-panel"
 import { CaPanel } from "@/components/calculator/ca-panel"
 import { DamageOutput } from "@/components/calculator/damage-output"
 
@@ -24,6 +25,7 @@ export default function Page() {
           <AtkDebuffPanel />
           <CrewPanel />
           <EnemyPanel />
+          <CriticalPanel />
           <CaPanel />
         </div>
 

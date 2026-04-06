@@ -159,7 +159,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: innate DEF, DEF up mods, DEF down mods, Unique DEF down mods, sleep status (dropdown: None / Stared Stiff / Sleep / Comatose)
 - **Commit:** `feat(components): add enemy panel`
 
-### [ ] Task 3.9 — CA panel (`ca-panel.tsx`)
+### [x] Task 3.9 — CA panel (`ca-panel.tsx`)
 
 - Inputs: CA multiplier, CA buff mods (%), CA weapon mods (%), fixed CA damage
 - **Commit:** `feat(components): add ca panel`

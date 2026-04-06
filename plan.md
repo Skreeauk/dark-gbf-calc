@@ -192,7 +192,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 
 ## Phase 5 — Docs
 
-### [ ] Task 5.1 — Update AGENTS.md if anything drifted during implementation
+### [x] Task 5.1 — Update AGENTS.md if anything drifted during implementation
 
 - Use **GLM-4.5-air** for this task
 - Check that folder structure, conventions, and scope sections still match the actual code

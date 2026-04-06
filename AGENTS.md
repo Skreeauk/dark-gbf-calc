@@ -6,7 +6,7 @@ Single-page web application for calculating Granblue Fantasy damage based on the
 
 ## Tech Stack
 
-- Next.js 16.2 with App Router and Static Export (`output: 'export'`)
+- Next.js 16.1.7 with App Router and Static Export (`output: 'export'`)
 - TypeScript (strict mode)
 - Tailwind CSS
 - shadcn/ui for components

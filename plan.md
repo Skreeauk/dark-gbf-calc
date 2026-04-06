@@ -17,7 +17,7 @@ All formula modules are pure functions. No UI or store imports. Types go in `typ
 - All percentage inputs typed as `number` (raw user value, e.g. `50` = 50%)
 - **Commit:** `feat(formula): define all input and output types`
 
-### [ ] Task 1.2 — Elemental boost (`elemental.ts`)
+### [x] Task 1.2 — Elemental boost (`elemental.ts`)
 
 - Implement `calculateElementalBoost(inputs: ElementalInputs): number`
 - Formula: `1 + elemSuperiority + elemSummonMod + elemEmpBuffs + elemAtkBuffs - elemAtkDebuffs`

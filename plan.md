@@ -175,7 +175,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 
 ## Phase 4 — App Layout
 
-### [ ] Task 4.1 — Page layout (`app/page.tsx`, `app/layout.tsx`, `app/globals.css`)
+### [x] Task 4.1 — Page layout (`app/page.tsx`, `app/layout.tsx`, `app/globals.css`)
 
 - Compose all panels into the 2-column layout: inputs left, output right (stacked on mobile)
 - Wire `damage-output.tsx` into the right column

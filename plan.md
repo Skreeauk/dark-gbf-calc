@@ -164,7 +164,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: CA multiplier, CA buff mods (%), CA weapon mods (%), fixed CA damage
 - **Commit:** `feat(components): add ca panel`
 
-### [ ] Task 3.10 — Damage output (`damage-output.tsx`)
+### [x] Task 3.10 — Damage output (`damage-output.tsx`)
 
 - Reads `baseDamage`, `normalDamage`, `criticalDamage`, `caDamage` from store
 - Displays each value formatted with thousands separators

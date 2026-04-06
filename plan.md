@@ -129,7 +129,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: base ATK, grid weapon ATK values (with weapon specialty toggle), summon ATK
 - **Commit:** `feat(components): add character panel`
 
-### [ ] Task 3.3 — Elemental panel (`elemental-panel.tsx`)
+### [x] Task 3.3 — Elemental panel (`elemental-panel.tsx`)
 
 - Inputs: element matchup (superior / inferior / neutral), summon mod, EMP buffs, ATK buffs, ATK debuffs
 - **Commit:** `feat(components): add elemental panel`

@@ -306,7 +306,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Add `FinalDamageOutput` below existing `DamageOutput` in right column
 - **Commit:** `feat(app): add supplemental/cap panels and final damage output to page`
 
-### [ ] Task 6.9 — Final build check
+### [x] Task 6.9 — Final build check
 
 - Run `npm run lint` — fix any ESLint errors
 - Run `npm run build` — verify static export succeeds with no errors

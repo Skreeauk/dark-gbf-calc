@@ -287,7 +287,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
   - Assassin Mode (checkbox — separate from Assassin ATK mod)
 - **Commit:** `feat(components): add damage cap panel`
 
-### [ ] Task 6.7 — Final Damage Output (`final-damage-output.tsx`)
+### [x] Task 6.7 — Final Damage Output (`final-damage-output.tsx`)
 
 - Card placed below existing `DamageOutput` in the right column
 - Displays 5 final damage values formatted with thousands separators:

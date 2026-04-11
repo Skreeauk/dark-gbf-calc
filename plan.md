@@ -274,7 +274,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Inputs: Supplemental Damage (flat number), Seraphic Mod (%), DMG Taken Amplified Mods (%)
 - **Commit:** `feat(components): add supplemental/seraphic/dmg-taken-amp panel`
 
-### [ ] Task 6.6 — Damage Cap panel (`damage-cap-panel.tsx`)
+### [x] Task 6.6 — Damage Cap panel (`damage-cap-panel.tsx`)
 
 - Collapsible section using `InputSection`
 - Inputs:

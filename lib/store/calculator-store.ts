@@ -11,9 +11,11 @@ import type {
   EnemyInputs,
   CaDamageInputs,
   CriticalInputs,
+  SupplementalSeraphicInputs,
+  DamageCapInputs,
 } from "../formula/types"
 import { calculate } from "../formula"
-import { ElementMatchup, SleepStatus } from "../formula/types"
+import { ElementMatchup, SleepStatus, HardCapMode } from "../formula/types"
 
 interface CalculatorState {
   inputs: CalculatorInputs
@@ -22,6 +24,13 @@ interface CalculatorState {
     normalDamage: number
     criticalDamage: number
     caDamage: number
+    finalDamage: {
+      normalStandard: number
+      normalAssassin: number
+      criticalStandard: number
+      criticalAssassin: number
+      caDamage: number
+    }
   }
 }
 
@@ -97,6 +106,20 @@ const defaultInputs: CalculatorInputs = {
   critical: {
     criticalMods: 0,
   },
+  supplementalSeraphic: {
+    supplementalDamage: 0,
+    seraphicMod: 0,
+    dmgTakenAmpMods: 0,
+  },
+  damageCap: {
+    genericDamageCapUp: 0,
+    normalDamageCapUp: 0,
+    caDamageCapUp: 0,
+    capPenetration: 0,
+    specialCaDmgCapUp: 0,
+    hardCapMode: HardCapMode.None,
+    assassinMode: false,
+  },
 }
 
 function calculateOutputs(inputs: CalculatorInputs) {
@@ -106,6 +129,7 @@ function calculateOutputs(inputs: CalculatorInputs) {
     normalDamage: result.normalDamage.value,
     criticalDamage: result.criticalDamage.value,
     caDamage: result.caDamage.value,
+    finalDamage: result.finalDamage,
   }
 }
 
@@ -122,6 +146,10 @@ export const useCalculatorStore = create<
     updateEnemy: (partial: Partial<EnemyInputs>) => void
     updateCaDamage: (partial: Partial<CaDamageInputs>) => void
     updateCritical: (partial: Partial<CriticalInputs>) => void
+    updateSupplementalSeraphic: (
+      partial: Partial<SupplementalSeraphicInputs>
+    ) => void
+    updateDamageCap: (partial: Partial<DamageCapInputs>) => void
   }
 >((set) => ({
   inputs: defaultInputs,
@@ -228,6 +256,33 @@ export const useCalculatorStore = create<
       const newInputs = {
         ...state.inputs,
         critical: { ...state.inputs.critical, ...partial },
+      }
+      return {
+        inputs: newInputs,
+        outputs: calculateOutputs(newInputs),
+      }
+    }),
+
+  updateSupplementalSeraphic: (partial) =>
+    set((state) => {
+      const newInputs = {
+        ...state.inputs,
+        supplementalSeraphic: {
+          ...state.inputs.supplementalSeraphic,
+          ...partial,
+        },
+      }
+      return {
+        inputs: newInputs,
+        outputs: calculateOutputs(newInputs),
+      }
+    }),
+
+  updateDamageCap: (partial) =>
+    set((state) => {
+      const newInputs = {
+        ...state.inputs,
+        damageCap: { ...state.inputs.damageCap, ...partial },
       }
       return {
         inputs: newInputs,

@@ -209,7 +209,7 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 
 Extends the existing formula pipeline with post-base-damage modifiers and a tiered damage cap system. Derived from `FORMULA.md` (Supplemental Damage, Seraphic boost, DMG Taken Amplified sections) and `CAP.md` (soft/hard cap tables, Damage Cap Up, Cap Penetration, Assassin cap tables, Special C.A. DMG Cap Up).
 
-### [ ] Task 6.1 — Extend types (`types.ts`)
+### [x] Task 6.1 — Extend types (`types.ts`)
 
 - Add `HardCapMode` enum: `None = 'none'`, `Cap6_6 = '6.6m'`, `Cap13_1 = '13.1m'`
 - Add `SupplementalSeraphicInputs`: `supplementalDamage` (flat number), `seraphicMod` (%), `dmgTakenAmpMods` (%)
@@ -217,7 +217,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Add `FinalDamageResult`: `normalStandard`, `normalAssassin`, `criticalStandard`, `criticalAssassin`, `caDamage` (all `number`)
 - Extend `CalculatorInputs` with `supplementalSeraphic` and `damageCap`
 - Extend `CalculatorResult` with `finalDamage: FinalDamageResult`
-- **Commit:** `feat(formula): add supplemental/seraphic/cap types`
+- **Commit:** `feat(formula): add supplemental/seraphic/cap types` ✓
 
 ### [ ] Task 6.2 — Final damage module (`final-damage.ts`)
 

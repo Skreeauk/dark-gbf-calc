@@ -11,6 +11,12 @@ export enum SleepStatus {
   Comatose = 1.5,
 }
 
+export enum HardCapMode {
+  None = "none",
+  Cap6_6 = "6.6m",
+  Cap13_1 = "13.1m",
+}
+
 export interface CharacterInputs {
   baseATK: number
   gridWeaponATK: number
@@ -91,6 +97,22 @@ export interface CriticalInputs {
   criticalMods: number
 }
 
+export interface SupplementalSeraphicInputs {
+  supplementalDamage: number
+  seraphicMod: number
+  dmgTakenAmpMods: number
+}
+
+export interface DamageCapInputs {
+  genericDamageCapUp: number
+  normalDamageCapUp: number
+  caDamageCapUp: number
+  capPenetration: number
+  specialCaDmgCapUp: number
+  hardCapMode: HardCapMode
+  assassinMode: boolean
+}
+
 export interface BaseDamageResult {
   value: number
 }
@@ -107,6 +129,14 @@ export interface CaDamageResult {
   value: number
 }
 
+export interface FinalDamageResult {
+  normalStandard: number
+  normalAssassin: number
+  criticalStandard: number
+  criticalAssassin: number
+  caDamage: number
+}
+
 export interface CalculatorInputs {
   character: CharacterInputs
   elemental: ElementalInputs
@@ -117,6 +147,8 @@ export interface CalculatorInputs {
   enemy: EnemyInputs
   caDamage: CaDamageInputs
   critical: CriticalInputs
+  supplementalSeraphic: SupplementalSeraphicInputs
+  damageCap: DamageCapInputs
 }
 
 export interface CalculatorResult {
@@ -124,4 +156,5 @@ export interface CalculatorResult {
   normalDamage: NormalDamageResult
   criticalDamage: CriticalDamageResult
   caDamage: CaDamageResult
+  finalDamage: FinalDamageResult
 }

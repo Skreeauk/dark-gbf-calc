@@ -9,7 +9,10 @@ import { CrewPanel } from "@/components/calculator/crew-panel"
 import { EnemyPanel } from "@/components/calculator/enemy-panel"
 import { CriticalPanel } from "@/components/calculator/critical-panel"
 import { CaPanel } from "@/components/calculator/ca-panel"
+import { SupplementalSeraphicPanel } from "@/components/calculator/supplemental-seraphic-panel"
+import { DamageCapPanel } from "@/components/calculator/damage-cap-panel"
 import { DamageOutput } from "@/components/calculator/damage-output"
+import { FinalDamageOutput } from "@/components/calculator/final-damage-output"
 
 export default function Page() {
   return (
@@ -27,10 +30,13 @@ export default function Page() {
           <EnemyPanel />
           <CriticalPanel />
           <CaPanel />
+          <SupplementalSeraphicPanel />
+          <DamageCapPanel />
         </div>
 
-        <div className="lg:sticky lg:top-6">
+        <div className="space-y-4 lg:sticky lg:top-6">
           <DamageOutput />
+          <FinalDamageOutput />
         </div>
       </div>
     </div>

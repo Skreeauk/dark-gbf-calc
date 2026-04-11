@@ -299,7 +299,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Reads from `outputs.finalDamage` in the store
 - **Commit:** `feat(components): add final damage output display`
 
-### [ ] Task 6.8 — Update page layout (`app/page.tsx`)
+### [x] Task 6.8 — Update page layout (`app/page.tsx`)
 
 - Add `SupplementalSeraphicPanel` after `CaPanel` in left column
 - Add `DamageCapPanel` after `SupplementalSeraphicPanel` in left column

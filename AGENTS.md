@@ -92,7 +92,7 @@ docs: update AGENTS.md model routing section
 
 Use Context7 for: Next.js, Tailwind CSS, shadcn/ui, Zustand, TypeScript, ESLint.
 
-**Do not use Context7 for** GBF game mechanics or damage formulas — use `FORMULA.md` in the repo root as the sole source of truth for those.
+**Do not use Context7 for** GBF game mechanics or damage formulas — use `FORMULA.md` in the repo root as the sole source of truth for damage formulas. Use `CAP.md` in the repo root as the sole source of truth for damage cap tables and mechanics.
 
 ---
 
@@ -108,7 +108,7 @@ Use Context7 for: Next.js, Tailwind CSS, shadcn/ui, Zustand, TypeScript, ESLint.
 
 ## v1 Scope — Do Not Implement Beyond This
 
-v1 covers **Base Damage + Normal / Critical / Charge Attack damage only**.
+v1 covers **Base Damage + Normal / Critical / Charge Attack damage + Supplemental / Seraphic / DMG Taken Amplified + Damage Caps**.
 
 The following are explicitly **out of scope for v1** and must not be implemented:
 
@@ -116,8 +116,6 @@ The following are explicitly **out of scope for v1** and must not be implemented
 - Chain Burst
 - Counter
 - Bonus damage (echo)
-- Supplemental / Seraphic
-- DMG Taken Amplified
 
 If a task references any of the above, flag it as out of scope rather than implementing it.
 
@@ -138,21 +136,26 @@ If a task references any of the above, flag it as out of scope rather than imple
       enemy.ts             — Enemy DEF (innate, DEF up/down, Unique DEF down, hard cap), Sleeping boost
       normal-damage.ts     — Normal Damage and Critical Damage (replaces damage-types.ts)
       ca-damage.ts         — Charge Attack damage: CA multiplier, CA buff boost, CA weapon boost, fixed CA damage
+      final-damage.ts      — Supplemental, Seraphic, DMG Taken Amplified, soft/hard damage caps
       index.ts             — Main calculate() entry point
     store/
       calculator-store.ts  — Zustand store
   components/
     calculator/
-      input-section.tsx        — Reusable collapsible section
-      character-panel.tsx      — ATK, weapon specialty
-      elemental-panel.tsx      — Elemental boost inputs
-      normal-omega-ex-panel.tsx— Normal/Omega/EX ATK, Enmity, Stamina
-      character-mods-panel.tsx — Char mods, Perpetuity, Assassin, etc.
-      atk-debuff-panel.tsx     — ATK down debuff input
-      crew-panel.tsx           — Crew Ship & Skills
-      enemy-panel.tsx          — DEF, Sleeping
-      ca-panel.tsx             — CA multiplier, buffs, weapon mods, fixed damage
-      damage-output.tsx        — Computed damage display
+      input-section.tsx            — Reusable collapsible section
+      character-panel.tsx          — ATK, weapon specialty
+      elemental-panel.tsx          — Elemental boost inputs
+      normal-omega-ex-panel.tsx    — Normal/Omega/EX ATK, Enmity, Stamina
+      character-mods-panel.tsx     — Char mods, Perpetuity, Assassin, etc.
+      atk-debuff-panel.tsx         — ATK down debuff input
+      crew-panel.tsx               — Crew Ship & Skills
+      enemy-panel.tsx              — DEF, Sleeping
+      critical-panel.tsx           — Critical Mods
+      ca-panel.tsx                 — CA multiplier, buffs, weapon mods, fixed damage
+      supplemental-seraphic-panel.tsx — Supplemental Damage, Seraphic Mod, DMG Taken Amplified
+      damage-cap-panel.tsx         — Damage Cap Up, Cap Penetration, Hard Cap, Assassin Mode, Special C.A. Cap
+      damage-output.tsx            — Raw damage display (base/normal/critical/CA)
+      final-damage-output.tsx      — Final damage display after caps and post-modifiers
   app/
     layout.tsx
     page.tsx

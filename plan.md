@@ -164,12 +164,12 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 - Inputs: Critical Mods (%)
 - **Commit:** `feat(components): add critical damage panel`
 
-### [x] Task 3.12 — CA panel (`ca-panel.tsx`)
+### [x] Task 3.10 — CA panel (`ca-panel.tsx`)
 
 - Inputs: CA multiplier, CA buff mods (%), CA weapon mods (%), fixed CA damage
 - **Commit:** `feat(components): add ca panel`
 
-### [x] Task 3.13 — Damage output (`damage-output.tsx`)
+### [x] Task 3.11 — Damage output (`damage-output.tsx`)
 
 - Reads `baseDamage`, `normalDamage`, `criticalDamage`, `caDamage` from store
 - Displays each value formatted with thousands separators
@@ -205,14 +205,123 @@ Build panels in the same order as the formula layer. Each panel reads from and w
 
 ---
 
+## Phase 6 — Supplemental, Seraphic, DMG Taken Amplified & Damage Caps
+
+Extends the existing formula pipeline with post-base-damage modifiers and a tiered damage cap system. Derived from `FORMULA.md` (Supplemental Damage, Seraphic boost, DMG Taken Amplified sections) and `CAP.md` (soft/hard cap tables, Damage Cap Up, Cap Penetration, Assassin cap tables, Special C.A. DMG Cap Up).
+
+### [ ] Task 6.1 — Extend types (`types.ts`)
+
+- Add `HardCapMode` enum: `None = 'none'`, `Cap6_6 = '6.6m'`, `Cap13_1 = '13.1m'`
+- Add `SupplementalSeraphicInputs`: `supplementalDamage` (flat number), `seraphicMod` (%), `dmgTakenAmpMods` (%)
+- Add `DamageCapInputs`: `genericDamageCapUp` (%), `normalDamageCapUp` (%), `caDamageCapUp` (%), `capPenetration` (%), `specialCaDmgCapUp` (%), `hardCapMode: HardCapMode`, `assassinMode: boolean`
+- Add `FinalDamageResult`: `normalStandard`, `normalAssassin`, `criticalStandard`, `criticalAssassin`, `caDamage` (all `number`)
+- Extend `CalculatorInputs` with `supplementalSeraphic` and `damageCap`
+- Extend `CalculatorResult` with `finalDamage: FinalDamageResult`
+- **Commit:** `feat(formula): add supplemental/seraphic/cap types`
+
+### [ ] Task 6.2 — Final damage module (`final-damage.ts`)
+
+- Define cap table constants (from `CAP.md`):
+  - Normal Standard: thresholds `[300k, 400k, 500k, 600k]`, reductions `[0, 0.20, 0.40, 0.95, 0.99]` — soft cap 445,000
+  - Normal Assassin: thresholds `[1M, 1.2M, 1.3M, 1.5M]`, reductions `[0, 0.40, 0.70, 0.95, 0.99]` — soft cap 1,160,000
+  - CA Standard: thresholds `[1.5M, 1.7M, 1.8M, 2.5M]`, reductions `[0, 0.40, 0.70, 0.95, 0.99]` — soft cap 1,685,000
+  - Hard cap 6.6M: thresholds `[7M, 8M]`, reductions `[0.50, 0.90, 0.999]`
+  - Hard cap 13.1M: thresholds `[14M, 15M]`, reductions `[0.50, 0.90, 0.999]`
+- Implement `applySoftCap(rawDamage, thresholds, reductions, damageCapUp, capPenetration)`:
+  - Scale thresholds by `(1 + damageCapUp)`
+  - Adjust reductions by penetration: `max(0, 1 - (1 - reduction) × (1 + penetration))`
+  - Iterate tiers, summing `min(diff, tierWidth) × (1 - adjustedReduction)`
+  - Reduction 0% tier is never affected by penetration
+- Implement `applyHardCap(damage, thresholds, reductions, specialCaCapUp?)`:
+  - Same tiered reduction logic, no Damage Cap Up effects (hard caps unaffected by cap up)
+  - `specialCaCapUp` scales hard cap thresholds for CA only
+- Implement `calculateFinalDamage(normalDamage, criticalDamage, caDamage, suppSeraphic, damageCap): FinalDamageResult`:
+  - **Normal/Critical** (FORMULA.md "Normal Attack" pattern):
+    1. `softCapped = applySoftCap(raw, table, totalCapUp, pen)` — compute for both standard and assassin cap tables
+    2. `withSeraphic = softCapped × (1 + seraphicMod/100)`
+    3. `hardCapped = applyHardCap(withSeraphic)` (if enabled)
+    4. `dmgTakenAmp = hardCapped × (dmgTakenAmpMods/100)` — can break hard cap
+    5. `final = hardCapped + dmgTakenAmp + supplementalDamage` — supplemental NOT boosted by seraphic
+  - **CA** (FORMULA.md "Skill Damage" pattern — same as CA per wiki):
+    1. Total CA cap up = `genericDamageCapUp + caDamageCapUp + (30 if assassinMode else 0)`
+    2. `softCapped = applySoftCap(rawCa, CA_TABLE, totalCapUp, pen)`
+    3. `withAmpAndSupp = softCapped + (softCapped × dmgTakenAmpMods/100) + supplementalDamage`
+    4. `withSeraphic = withAmpAndSupp × (1 + seraphicMod/100)` — seraphic DOES boost supplemental for CA
+    5. `final = applyHardCap(withSeraphic, table, specialCaDmgCapUp)` (if enabled)
+- Return all 5 values: `normalStandard`, `normalAssassin`, `criticalStandard`, `criticalAssassin`, `caDamage`
+- **Commit:** `feat(formula): implement final damage with caps and post-modifiers`
+
+### [ ] Task 6.3 — Wire into main entry point (`index.ts`)
+
+- Import `calculateFinalDamage` from `final-damage.ts`
+- Call it after computing `normalDamage`, `criticalDamage`, `caDamage`
+- Pass `supplementalSeraphic` and `damageCap` from inputs
+- Add `finalDamage` to returned `CalculatorResult`
+- **Commit:** `feat(formula): wire final damage into calculate() entry point`
+
+### [ ] Task 6.4 — Update Zustand store (`calculator-store.ts`)
+
+- Add `supplementalSeraphic` and `damageCap` to `defaultInputs` with appropriate defaults (`supplementalDamage: 0`, `seraphicMod: 0`, `dmgTakenAmpMods: 0`, `genericDamageCapUp: 0`, `normalDamageCapUp: 0`, `caDamageCapUp: 0`, `capPenetration: 0`, `specialCaDmgCapUp: 0`, `hardCapMode: HardCapMode.None`, `assassinMode: false`)
+- Add `updateSupplementalSeraphic` and `updateDamageCap` updater functions (same pattern as existing updaters)
+- Add `finalDamage` object (5 fields) to `outputs`
+- Update `calculateOutputs` to extract `finalDamage` from result
+- **Commit:** `feat(store): add supplemental/seraphic/cap inputs and outputs`
+
+### [ ] Task 6.5 — Supplemental/Seraphic/DMG Taken Amp panel (`supplemental-seraphic-panel.tsx`)
+
+- Collapsible section using `InputSection`
+- Inputs: Supplemental Damage (flat number), Seraphic Mod (%), DMG Taken Amplified Mods (%)
+- **Commit:** `feat(components): add supplemental/seraphic/dmg-taken-amp panel`
+
+### [ ] Task 6.6 — Damage Cap panel (`damage-cap-panel.tsx`)
+
+- Collapsible section using `InputSection`
+- Inputs:
+  - Generic Damage Cap Up (%)
+  - N.A. Damage Cap Up (%)
+  - C.A. Damage Cap Up (%)
+  - Cap Penetration (%)
+  - Special C.A. DMG Cap Up (%)
+  - Hard Cap Mode (dropdown: None / 6.6M / 13.1M)
+  - Assassin Mode (checkbox — separate from Assassin ATK mod)
+- **Commit:** `feat(components): add damage cap panel`
+
+### [ ] Task 6.7 — Final Damage Output (`final-damage-output.tsx`)
+
+- Card placed below existing `DamageOutput` in the right column
+- Displays 5 final damage values formatted with thousands separators:
+  - Normal (Standard Cap)
+  - Normal (Assassin Cap)
+  - Critical (Standard Cap)
+  - Critical (Assassin Cap)
+  - CA Damage
+- Reads from `outputs.finalDamage` in the store
+- **Commit:** `feat(components): add final damage output display`
+
+### [ ] Task 6.8 — Update page layout (`app/page.tsx`)
+
+- Add `SupplementalSeraphicPanel` after `CaPanel` in left column
+- Add `DamageCapPanel` after `SupplementalSeraphicPanel` in left column
+- Add `FinalDamageOutput` below existing `DamageOutput` in right column
+- **Commit:** `feat(app): add supplemental/cap panels and final damage output to page`
+
+### [ ] Task 6.9 — Final build check
+
+- Run `npm run lint` — fix any ESLint errors
+- Run `npm run build` — verify static export succeeds with no errors
+- **Commit:** `chore: verify lint and build pass for phase 6`
+
+---
+
 ## Task Order Summary
 
 ```
 1.1 → 1.2 → 1.3 → 1.4 → 1.5 → 1.6 → 1.7 → 1.8 → 1.9 → 1.10 → 1.11
 2.1
-3.1 → 3.2 → 3.3 → 3.4 → 3.5 → 3.6 → 3.7 → 3.8 → 3.9 → 3.10 → 3.11 → 3.12 → 3.13
+3.1 → 3.2 → 3.3 → 3.4 → 3.5 → 3.6 → 3.7 → 3.8 → 3.9 → 3.10 → 3.11
 4.1 → 4.2
 5.1
+6.1 → 6.2 → 6.3 → 6.4 → 6.5 → 6.6 → 6.7 → 6.8 → 6.9
 ```
 
-Phase 2 must be fully complete before Phase 3. Phase 3 must be complete before Phase 4. Phases 5 come last.
+Phase 2 must be fully complete before Phase 3. Phase 3 must be complete before Phase 4. Phases 5 come last. Phase 6 depends on all prior phases being complete.

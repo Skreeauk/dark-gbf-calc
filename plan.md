@@ -218,15 +218,16 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Extend `CalculatorInputs` with `supplementalSeraphic` and `damageCap`
 - Extend `CalculatorResult` with `finalDamage: FinalDamageResult`
 - **Commit:** `feat(formula): add supplemental/seraphic/cap types` ✓
+- **Commit:** `feat(formula): implement final damage with caps and post-modifiers` ✓
 
-### [ ] Task 6.2 — Final damage module (`final-damage.ts`)
+### [x] Task 6.2 — Final damage module (`final-damage.ts`)
 
 - Define cap table constants (from `CAP.md`):
   - Normal Standard: thresholds `[300k, 400k, 500k, 600k]`, reductions `[0, 0.20, 0.40, 0.95, 0.99]` — soft cap 445,000
   - Normal Assassin: thresholds `[1M, 1.2M, 1.3M, 1.5M]`, reductions `[0, 0.40, 0.70, 0.95, 0.99]` — soft cap 1,160,000
   - CA Standard: thresholds `[1.5M, 1.7M, 1.8M, 2.5M]`, reductions `[0, 0.40, 0.70, 0.95, 0.99]` — soft cap 1,685,000
-  - Hard cap 6.6M: thresholds `[7M, 8M]`, reductions `[0.50, 0.90, 0.999]`
-  - Hard cap 13.1M: thresholds `[14M, 15M]`, reductions `[0.50, 0.90, 0.999]`
+  - Hard cap 6.6M: thresholds `[6M, 7M, 8M]`, reductions `[0, 0.50, 0.90, 0.999]`
+  - Hard cap 13.1M: thresholds `[12M, 14M, 15M]`, reductions `[0, 0.50, 0.90, 0.999]`
 - Implement `applySoftCap(rawDamage, thresholds, reductions, damageCapUp, capPenetration)`:
   - Scale thresholds by `(1 + damageCapUp)`
   - Adjust reductions by penetration: `max(0, 1 - (1 - reduction) × (1 + penetration))`
@@ -240,7 +241,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
     1. `softCapped = applySoftCap(raw, table, totalCapUp, pen)` — compute for both standard and assassin cap tables
     2. `withSeraphic = softCapped × (1 + seraphicMod/100)`
     3. `hardCapped = applyHardCap(withSeraphic)` (if enabled)
-    4. `dmgTakenAmp = hardCapped × (dmgTakenAmpMods/100)` — can break hard cap
+    4. `dmgTakenAmp = hardCapped × (dmgTakenAmpMods/100)` — uses post-hard-cap value as base; can break hard cap per CAP.md
     5. `final = hardCapped + dmgTakenAmp + supplementalDamage` — supplemental NOT boosted by seraphic
   - **CA** (FORMULA.md "Skill Damage" pattern — same as CA per wiki):
     1. Total CA cap up = `genericDamageCapUp + caDamageCapUp + (30 if assassinMode else 0)`
@@ -251,15 +252,15 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Return all 5 values: `normalStandard`, `normalAssassin`, `criticalStandard`, `criticalAssassin`, `caDamage`
 - **Commit:** `feat(formula): implement final damage with caps and post-modifiers`
 
-### [ ] Task 6.3 — Wire into main entry point (`index.ts`)
+### [x] Task 6.3 — Wire into main entry point (`index.ts`)
 
 - Import `calculateFinalDamage` from `final-damage.ts`
 - Call it after computing `normalDamage`, `criticalDamage`, `caDamage`
 - Pass `supplementalSeraphic` and `damageCap` from inputs
 - Add `finalDamage` to returned `CalculatorResult`
-- **Commit:** `feat(formula): wire final damage into calculate() entry point`
+- **Commit:** `feat(formula): wire final damage into calculate() entry point` ✓
 
-### [ ] Task 6.4 — Update Zustand store (`calculator-store.ts`)
+### [x] Task 6.4 — Update Zustand store (`calculator-store.ts`)
 
 - Add `supplementalSeraphic` and `damageCap` to `defaultInputs` with appropriate defaults (`supplementalDamage: 0`, `seraphicMod: 0`, `dmgTakenAmpMods: 0`, `genericDamageCapUp: 0`, `normalDamageCapUp: 0`, `caDamageCapUp: 0`, `capPenetration: 0`, `specialCaDmgCapUp: 0`, `hardCapMode: HardCapMode.None`, `assassinMode: false`)
 - Add `updateSupplementalSeraphic` and `updateDamageCap` updater functions (same pattern as existing updaters)
@@ -267,7 +268,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 - Update `calculateOutputs` to extract `finalDamage` from result
 - **Commit:** `feat(store): add supplemental/seraphic/cap inputs and outputs`
 
-### [ ] Task 6.5 — Supplemental/Seraphic/DMG Taken Amp panel (`supplemental-seraphic-panel.tsx`)
+### [x] Task 6.5 — Supplemental/Seraphic/DMG Taken Amp panel (`supplemental-seraphic-panel.tsx`)
 
 - Collapsible section using `InputSection`
 - Inputs: Supplemental Damage (flat number), Seraphic Mod (%), DMG Taken Amplified Mods (%)

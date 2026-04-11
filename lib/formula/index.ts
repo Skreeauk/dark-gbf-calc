@@ -3,6 +3,7 @@ import { calculateBaseDamage } from "./base-damage"
 import { calculateEnemyDef, calculateSleepingBoost } from "./enemy"
 import { calculateNormalDamage, calculateCriticalDamage } from "./normal-damage"
 import { calculateCaDamage } from "./ca-damage"
+import { calculateFinalDamage } from "./final-damage"
 
 export function calculate(inputs: CalculatorInputs): CalculatorResult {
   const baseDamage = calculateBaseDamage(inputs)
@@ -18,11 +19,19 @@ export function calculate(inputs: CalculatorInputs): CalculatorResult {
     inputs.critical.criticalMods
   )
   const caDamage = calculateCaDamage(normalDamage, inputs.caDamage)
+  const finalDamage = calculateFinalDamage(
+    normalDamage,
+    criticalDamage,
+    caDamage,
+    inputs.supplementalSeraphic,
+    inputs.damageCap
+  )
 
   return {
     baseDamage: { value: baseDamage },
     normalDamage: { value: normalDamage },
     criticalDamage: { value: criticalDamage },
     caDamage: { value: caDamage },
+    finalDamage,
   }
 }

@@ -166,6 +166,7 @@ The following are explicitly **out of scope for v1** and must not be implemented
       weapon-select-dialog.tsx     — Dialog for selecting weapons from database with search/filters
       grid-layout.tsx              — 3x4 grid layout + mainhand slot + summary
     nav-bar.tsx                    — Shared navigation bar for calculator and grid pages
+    theme-provider.tsx            — next-themes wrapper with class-based dark mode
   app/
     layout.tsx
     page.tsx                       — Calculator page

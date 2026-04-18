@@ -318,7 +318,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 
 Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT integrate with calculator formula layer — no auto-sync of ATK totals to calculator. Each weapon stores full data: name, ATK, weapon type, element, and skills.
 
-### [ ] Task 7.1 — Define grid types (`lib/grid/types.ts`)
+### [x] Task 7.1 — Define grid types (`lib/grid/types.ts`)
 
 - `WeaponType` enum: Sword, Dagger, Spear, Axe, Wand, Gun, Fist, Bow, Harp, Katana
 - `Element` enum: Fire, Water, Earth, Wind, Light, Dark
@@ -329,21 +329,21 @@ Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT i
 - `WeaponGrid` interface: `{ mainhand: GridSlot, grid: GridSlot[] }` (12 grid slots)
 - **Commit:** `feat(grid): define weapon grid types`
 
-### [ ] Task 7.2 — Placeholder weapon database (`lib/grid/weapons.ts`)
+### [x] Task 7.2 — Placeholder weapon database (`lib/grid/weapons.ts`)
 
 - Export `WEAPON_DATABASE: Weapon[]` — ~20-30 sample weapons covering all weapon types and elements
 - Some weapons with 0 skills, some with 1-2 skills (mix of Normal, Omega, EX types)
 - Each has unique `id`, reasonable ATK values, name
 - **Commit:** `feat(grid): add placeholder weapon database`
 
-### [ ] Task 7.3 — Grid Zustand store (`lib/store/grid-store.ts`)
+### [x] Task 7.3 — Grid Zustand store (`lib/store/grid-store.ts`)
 
 - State: `mainhand: GridSlot` + `grid: GridSlot[]` (length 12)
 - Actions: `setMainhand(weapon)`, `setGridSlot(index, weapon)`, `clearMainhand()`, `clearSlot(index)`, `clearAll()`
 - No calculator integration (standalone)
 - **Commit:** `feat(store): add weapon grid store`
 
-### [ ] Task 7.4 — Weapon slot component (`components/grid/weapon-slot.tsx`)
+### [x] Task 7.4 — Weapon slot component (`components/grid/weapon-slot.tsx`)
 
 - Visual card for a single weapon slot
 - Empty state: dashed border, "+" icon, "Empty" text
@@ -352,7 +352,7 @@ Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT i
 - Click handler prop for opening selection
 - **Commit:** `feat(components): add weapon slot component`
 
-### [ ] Task 7.5 — Weapon select dialog (`components/grid/weapon-select-dialog.tsx`)
+### [x] Task 7.5 — Weapon select dialog (`components/grid/weapon-select-dialog.tsx`)
 
 - shadcn `Dialog` or `Sheet` with search/filter
 - Search by weapon name (text input)
@@ -362,7 +362,7 @@ Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT i
 - Props: `open`, `onOpenChange`, `onSelect(weapon)`, `slotType: "mainhand" | "grid"`
 - **Commit:** `feat(components): add weapon selection dialog`
 
-### [ ] Task 7.6 — Grid layout component (`components/grid/grid-layout.tsx`)
+### [x] Task 7.6 — Grid layout component (`components/grid/grid-layout.tsx`)
 
 - Renders mainhand slot (prominent, centered or left-aligned at top)
 - Renders 3x4 grid below using CSS grid (`grid-cols-3`)
@@ -371,14 +371,14 @@ Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT i
 - Shows total grid ATK summary below
 - **Commit:** `feat(components): add grid layout component`
 
-### [ ] Task 7.7 — Grid page (`app/grid/page.tsx`)
+### [x] Task 7.7 — Grid page (`app/grid/page.tsx`)
 
 - `"use client"` page at `/grid`
 - Title "Grid Builder", imports `GridLayout`
 - Minimal wrapper with padding, matching calculator page style
 - **Commit:** `feat(app): add grid builder page`
 
-### [ ] Task 7.8 — Shared navigation (`components/nav-bar.tsx` + update layouts)
+### [x] Task 7.8 — Shared navigation (`components/nav-bar.tsx` + update layouts)
 
 - Simple nav bar with links: "Calculator" → `/`, "Grid Builder" → `/grid`
 - Added to `app/layout.tsx` so it appears on all pages

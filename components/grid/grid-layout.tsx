@@ -65,7 +65,7 @@ export function GridLayout() {
           variant="mainhand"
           onClick={() => handleSlotClick("mainhand")}
         />
-        {grid.map((slot, index) => (
+        {grid.slice(0, 3).map((slot, index) => (
           <WeaponSlot
             key={index}
             weapon={slot}
@@ -74,14 +74,32 @@ export function GridLayout() {
           />
         ))}
         <div className="hidden sm:block" />
+        {grid.slice(3, 6).map((slot, index) => (
+          <WeaponSlot
+            key={index + 3}
+            weapon={slot}
+            variant="grid"
+            onClick={() => handleSlotClick(index + 3)}
+          />
+        ))}
         <div className="hidden sm:block" />
+        {grid.slice(6, 9).map((slot, index) => (
+          <WeaponSlot
+            key={index + 6}
+            weapon={slot}
+            variant="grid"
+            onClick={() => handleSlotClick(index + 6)}
+          />
+        ))}
         <div className="hidden sm:block" />
-        <div className="hidden sm:block" />
-        <div className="hidden sm:block" />
-        <div className="hidden sm:block" />
-        <div className="hidden sm:block" />
-        <div className="hidden sm:block" />
-        <div className="hidden sm:block" />
+        {grid.slice(9, 12).map((slot, index) => (
+          <WeaponSlot
+            key={index + 9}
+            weapon={slot}
+            variant="grid"
+            onClick={() => handleSlotClick(index + 9)}
+          />
+        ))}
       </div>
 
       <div className="rounded-lg border bg-muted/50 p-4">

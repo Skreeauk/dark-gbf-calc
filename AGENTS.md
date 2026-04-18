@@ -116,8 +116,9 @@ The following are explicitly **out of scope for v1** and must not be implemented
 - Chain Burst
 - Counter
 - Bonus damage (echo)
+- Calculator-grid integration (auto-syncing grid ATK to calculator)
 
-If a task references any of the above, flag it as out of scope rather than implementing it.
+**Grid Builder** (Phase 7) is a standalone feature that does not integrate with the calculator formula layer. It stores weapon grid data independently.
 
 ---
 
@@ -138,8 +139,12 @@ If a task references any of the above, flag it as out of scope rather than imple
       ca-damage.ts         — Charge Attack damage: CA multiplier, CA buff boost, CA weapon boost, fixed CA damage
       final-damage.ts      — Supplemental, Seraphic, DMG Taken Amplified, soft/hard damage caps
       index.ts             — Main calculate() entry point
+    grid/
+      types.ts             — Weapon grid types: Weapon, WeaponSkill, GridSlot, WeaponGrid
+      weapons.ts           — Placeholder weapon database
     store/
-      calculator-store.ts  — Zustand store
+      calculator-store.ts  — Zustand store for calculator
+      grid-store.ts        — Zustand store for grid builder
   components/
     calculator/
       input-section.tsx            — Reusable collapsible section
@@ -156,9 +161,16 @@ If a task references any of the above, flag it as out of scope rather than imple
       damage-cap-panel.tsx         — Damage Cap Up, Cap Penetration, Hard Cap, Assassin Mode, Special C.A. Cap
       damage-output.tsx            — Raw damage display (base/normal/critical/CA)
       final-damage-output.tsx      — Final damage display after caps and post-modifiers
+    grid/
+      weapon-slot.tsx              — Visual card for single weapon slot (mainhand or grid)
+      weapon-select-dialog.tsx     — Dialog for selecting weapons from database with search/filters
+      grid-layout.tsx              — 3x4 grid layout + mainhand slot + summary
+    nav-bar.tsx                    — Shared navigation bar for calculator and grid pages
   app/
     layout.tsx
-    page.tsx
+    page.tsx                       — Calculator page
+    grid/
+      page.tsx                     — Grid builder page
     globals.css
 ```
 

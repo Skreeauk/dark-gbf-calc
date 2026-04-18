@@ -314,6 +314,85 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 
 ---
 
+## Phase 7 — Grid Builder (Standalone Page at `/grid`)
+
+Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT integrate with calculator formula layer — no auto-sync of ATK totals to calculator. Each weapon stores full data: name, ATK, weapon type, element, and skills.
+
+### [ ] Task 7.1 — Define grid types (`lib/grid/types.ts`)
+
+- `WeaponType` enum: Sword, Dagger, Spear, Axe, Wand, Gun, Fist, Bow, Harp, Katana
+- `Element` enum: Fire, Water, Earth, Wind, Light, Dark
+- `WeaponSkillType` enum: NormalAtk, NormalEnmity, NormalStamina, OmegaAtk, OmegaEnmity, OmegaStamina, ExAtk, ExMysterious, ExEnmity, ExStamina, Bahamut, Ultima, None
+- `WeaponSkill` interface: `{ name, type: WeaponSkillType, value: number }` (value is %)
+- `Weapon` interface: `{ id, name, atk, weaponType, element, skills: WeaponSkill[] }`
+- `GridSlot` type: `Weapon | null`
+- `WeaponGrid` interface: `{ mainhand: GridSlot, grid: GridSlot[] }` (12 grid slots)
+- **Commit:** `feat(grid): define weapon grid types`
+
+### [ ] Task 7.2 — Placeholder weapon database (`lib/grid/weapons.ts`)
+
+- Export `WEAPON_DATABASE: Weapon[]` — ~20-30 sample weapons covering all weapon types and elements
+- Some weapons with 0 skills, some with 1-2 skills (mix of Normal, Omega, EX types)
+- Each has unique `id`, reasonable ATK values, name
+- **Commit:** `feat(grid): add placeholder weapon database`
+
+### [ ] Task 7.3 — Grid Zustand store (`lib/store/grid-store.ts`)
+
+- State: `mainhand: GridSlot` + `grid: GridSlot[]` (length 12)
+- Actions: `setMainhand(weapon)`, `setGridSlot(index, weapon)`, `clearMainhand()`, `clearSlot(index)`, `clearAll()`
+- No calculator integration (standalone)
+- **Commit:** `feat(store): add weapon grid store`
+
+### [ ] Task 7.4 — Weapon slot component (`components/grid/weapon-slot.tsx`)
+
+- Visual card for a single weapon slot
+- Empty state: dashed border, "+" icon, "Empty" text
+- Filled state: shows weapon name, ATK, element badge, weapon type icon, skill pills
+- `variant` prop: `"mainhand"` (larger, accent border) vs `"grid"` (standard)
+- Click handler prop for opening selection
+- **Commit:** `feat(components): add weapon slot component`
+
+### [ ] Task 7.5 — Weapon select dialog (`components/grid/weapon-select-dialog.tsx`)
+
+- shadcn `Dialog` or `Sheet` with search/filter
+- Search by weapon name (text input)
+- Filter by weapon type (dropdown/chips), element (dropdown/chips)
+- List of matching weapons from `WEAPON_DATABASE`, each showing name/ATK/type/element/skills
+- Click to select, closes dialog
+- Props: `open`, `onOpenChange`, `onSelect(weapon)`, `slotType: "mainhand" | "grid"`
+- **Commit:** `feat(components): add weapon selection dialog`
+
+### [ ] Task 7.6 — Grid layout component (`components/grid/grid-layout.tsx`)
+
+- Renders mainhand slot (prominent, centered or left-aligned at top)
+- Renders 3x4 grid below using CSS grid (`grid-cols-3`)
+- Each slot wired to the grid store
+- Clicking any slot opens the weapon select dialog for that slot
+- Shows total grid ATK summary below
+- **Commit:** `feat(components): add grid layout component`
+
+### [ ] Task 7.7 — Grid page (`app/grid/page.tsx`)
+
+- `"use client"` page at `/grid`
+- Title "Grid Builder", imports `GridLayout`
+- Minimal wrapper with padding, matching calculator page style
+- **Commit:** `feat(app): add grid builder page`
+
+### [ ] Task 7.8 — Shared navigation (`components/nav-bar.tsx` + update layouts)
+
+- Simple nav bar with links: "Calculator" → `/`, "Grid Builder" → `/grid`
+- Added to `app/layout.tsx` so it appears on all pages
+- Uses Next.js `Link` component, highlights active route
+- **Commit:** `feat(app): add shared navigation bar`
+
+### [ ] Task 7.9 — Build check
+
+- `npm run lint` — fix any ESLint errors
+- `npm run build` — verify static export succeeds
+- **Commit:** `chore: verify lint and build pass for grid builder`
+
+---
+
 ## Task Order Summary
 
 ```
@@ -323,6 +402,7 @@ Extends the existing formula pipeline with post-base-damage modifiers and a tier
 4.1 → 4.2
 5.1
 6.1 → 6.2 → 6.3 → 6.4 → 6.5 → 6.6 → 6.7 → 6.8 → 6.9
+7.1 → 7.2 → 7.3 → 7.4 → 7.5 → 7.6 → 7.7 → 7.8 → 7.9
 ```
 
-Phase 2 must be fully complete before Phase 3. Phase 3 must be complete before Phase 4. Phases 5 come last. Phase 6 depends on all prior phases being complete.
+Phase 2 must be fully complete before Phase 3. Phase 3 must be complete before Phase 4. Phases 5 come last. Phase 6 depends on all prior phases being complete. Phase 7 (Grid Builder) is standalone — no dependency on calculator formula layer, shares only tech stack and conventions.

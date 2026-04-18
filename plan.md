@@ -385,7 +385,7 @@ Standalone weapon grid builder for managing mainhand + 12 grid slots. Does NOT i
 - Uses Next.js `Link` component, highlights active route
 - **Commit:** `feat(app): add shared navigation bar`
 
-### [ ] Task 7.9 — Build check
+### [x] Task 7.9 — Build check
 
 - `npm run lint` — fix any ESLint errors
 - `npm run build` — verify static export succeeds

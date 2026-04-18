@@ -3,11 +3,11 @@
 import {
   Plus,
   Swords,
-  Arrow,
+  ArrowBigUp,
   Axe,
   Wand,
   Zap,
-  Fist,
+  HandFist,
   Target,
   Music,
 } from "lucide-react"
@@ -33,11 +33,11 @@ const elementColors = {
 const weaponIcons = {
   [WeaponType.Sword]: Swords,
   [WeaponType.Dagger]: Swords,
-  [WeaponType.Spear]: Arrow,
+  [WeaponType.Spear]: ArrowBigUp,
   [WeaponType.Axe]: Axe,
   [WeaponType.Wand]: Wand,
   [WeaponType.Gun]: Zap,
-  [WeaponType.Fist]: Fist,
+  [WeaponType.Fist]: HandFist,
   [WeaponType.Bow]: Target,
   [WeaponType.Harp]: Music,
   [WeaponType.Katana]: Swords,

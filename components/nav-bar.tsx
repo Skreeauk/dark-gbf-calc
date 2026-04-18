@@ -56,7 +56,7 @@ export function NavBar() {
             onClick={() =>
               setTheme(resolvedTheme === "dark" ? "light" : "dark")
             }
-            className="h-9 w-9"
+            className="h-9 w-9 border border-border"
             aria-label="Toggle theme"
           >
             {mounted && resolvedTheme === "dark" ? (

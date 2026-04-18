@@ -49,7 +49,7 @@ export function WeaponSlot({ weapon, variant, onClick }: WeaponSlotProps) {
 
   return (
     <Card
-      className={`cursor-pointer transition-all hover:scale-105 hover:shadow-lg ${isEmpty ? "border-dashed" : ""} ${isMainhand ? "h-48 border-2 border-primary bg-accent/50" : "h-32"} `}
+      className={`cursor-pointer transition-all hover:scale-105 hover:shadow-lg ${isEmpty ? "border-dashed" : ""} ${isMainhand ? "h-32 border-2 border-primary bg-accent/50" : "h-32"} `}
       onClick={onClick}
     >
       <CardContent className="flex h-full flex-col p-3">

@@ -59,29 +59,29 @@ export function GridLayout() {
         slotType={activeSlot === "mainhand" ? "mainhand" : "grid"}
       />
 
-      <div>
-        <h2 className="mb-4 text-xl font-bold">Mainhand</h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+        <WeaponSlot
+          weapon={mainhand}
+          variant="mainhand"
+          onClick={() => handleSlotClick("mainhand")}
+        />
+        {grid.map((slot, index) => (
           <WeaponSlot
-            weapon={mainhand}
-            variant="mainhand"
-            onClick={() => handleSlotClick("mainhand")}
+            key={index}
+            weapon={slot}
+            variant="grid"
+            onClick={() => handleSlotClick(index)}
           />
-        </div>
-      </div>
-
-      <div>
-        <h2 className="mb-4 text-xl font-bold">Grid (3x4)</h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {grid.map((slot, index) => (
-            <WeaponSlot
-              key={index}
-              weapon={slot}
-              variant="grid"
-              onClick={() => handleSlotClick(index)}
-            />
-          ))}
-        </div>
+        ))}
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
+        <div className="hidden sm:block" />
       </div>
 
       <div className="rounded-lg border bg-muted/50 p-4">
